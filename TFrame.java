@@ -143,6 +143,29 @@ public class TFrame extends JFrame {
 		else
 			currentPlayer = "x";
 	}
+	
+ 	private boolean checkTie() {
+		
+		int tally = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				
+				if(board[i][j].getText().isEmpty()) {
+					break;
+				} 
+				else {
+					tally = tally + 1;
+				}
+			}	 
+	        }
+		if (tally == 9) {
+			return true;
+			
+		} else {	
+			return false;
+		}
+	}
+	
 	private void hasWinner() {//checks if the game has been won
 	        if(board[0][0].getText().equals(currentPlayer) && board[1][0].getText().equals(currentPlayer) && board[2][0].getText().equals(currentPlayer)) {
 	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
@@ -175,6 +198,10 @@ public class TFrame extends JFrame {
 	        else if(board[2][0].getText().equals(currentPlayer) && board[2][1].getText().equals(currentPlayer) && board[2][2].getText().equals(currentPlayer)) {
 	            JOptionPane.showMessageDialog(null, "Player " + currentPlayer + " has won");
 	            hasWinner = true;
+	        }
+		else if (checkTie() == true) {        	
+	        	JOptionPane.showMessageDialog(null, "The game has ended in a tie");
+	        	hasWinner = false;
 	        }
 	}
 	
